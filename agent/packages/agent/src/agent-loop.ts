@@ -361,9 +361,9 @@ async function runLoop(
 	const loopStart = Date.now();
 	let timeWarningInjected = false;
 	const _envTimeoutSec = Number(process.env.TAU_AGENT_TIMEOUT || process.env.PI_AGENT_TIMEOUT || "0");
-	const _budgetMs = _envTimeoutSec > 0 ? _envTimeoutSec * 1000 : 200_000;
-	const GRACEFUL_EXIT_MS = Math.max(15_000, Math.floor(_budgetMs * 0.85));
-	const HARD_ABORT_MS = Math.max(GRACEFUL_EXIT_MS + 3_000, Math.floor(_budgetMs * 0.92));
+	const _budgetMs = _envTimeoutSec > 0 ? _envTimeoutSec * 1000 : 280_000;
+	const GRACEFUL_EXIT_MS = Math.max(15_000, Math.floor(_budgetMs * 0.7));
+	const HARD_ABORT_MS = Math.max(GRACEFUL_EXIT_MS + 3_000, Math.floor(_budgetMs * 0.8));
 	// Tight budgets (<120s) get an earlier warning so the LLM stops exploring sooner.
 	const TIME_WARNING_MS = _budgetMs < 120_000 ? Math.floor(_budgetMs * 0.4) : 30_000;
 	const _watchdogTimer = setTimeout(() => {
